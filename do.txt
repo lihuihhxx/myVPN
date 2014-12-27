@@ -1,0 +1,18 @@
+0. Learn how to connect EC2 instance via SSH
+ *http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html
+ *For example: "ssh -i my.pem username@Public_DNS" under linux, putty in windows
+
+1. Get a EC2 instance 
+ *Use "Tokyo" region
+ *Use "Ubuntu Server 14.04 LTS (HVM), SSD Volume Type" AMI
+ *Any "Instance Type" is OK
+ *Set "Auto-assign Public IP" as "Enable"
+ *Add "Custom TCP Rule" for "TCP:1723 port" via "Anywhere" Source
+
+2. Config EC2 instance
+ *Get VPN config script: wget https://raw.githubusercontent.com/lihuihhxx/myVPN/master/scripts/aws_ubuntu_vpn_cmds.sh
+ *Run aws_ubuntu_vpn_cmds.sh. You can change the user/passwd if you want.
+
+3. Connect VPN server
+ *The VPN user/passwd is in aws_ubuntu_vpn_cmds.sh. Default is vpn/test123.
+ *Enjoy!
