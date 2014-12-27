@@ -3,7 +3,7 @@
 USER="vpn"
 PASSWD="test123"
 
-sudo apt-get install -y pptpd ppp
+sudo apt-get install -y pptpd
 sudo iptables --flush POSTROUTING --table nat
 sudo iptables --flush FORWARD
 sudo iptables -L
@@ -21,7 +21,7 @@ echo "ms-dns `sudo cat /etc/resolv.conf  | grep nameserver | head -n 1 | awk '{p
 echo "ms-dns 8.8.8.8" | sudo tee -a /etc/ppp/pptpd-options
 # set VPN user, passwd info
 echo "vpn $USER $PASSWD *" | sudo tee -a /etc/ppp/chap-secrets
-# add iptables rule 
+# add iptables rule
 sudo iptables -t nat -A POSTROUTING -s 192.168.240.0/24 -j SNAT --to-source `sudo ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk 'NR==1 { print $1}'`
 sudo iptables -A FORWARD -p tcp --syn -s 192.168.240.0/24 -j TCPMSS --set-mss 1356
 sudo iptables -L
